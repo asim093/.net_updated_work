@@ -1,0 +1,78 @@
+﻿@model landingpage.Models.Item
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Index.cshtml";
+}
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="@Model.Pimage" alt="Item Image">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="display-5 mb-4">@Model.Name</h1>
+                <p class="mb-4">@Model.Description</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Rs. @Model.Price</p>
+                <form asp-action="AddtoCart" method="post">
+                    <div class="mb-3">
+                        <label for="qty" class="form-label">Quantity</label>
+                        <input type="number" name="qty" id="qty" value="1" min="1" max="10" class="form-control" />
+                    </div>
+                    <input type="hidden" name="price" value="@Model.Price" />
+                    <input type="hidden" name="itemId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary rounded-pill py-3 px-5 mt-3">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+<h1>Details</h1>
+
+<div>
+    <h4>Item Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pimage)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.Pimage" alt="Item Image" class="img-fluid" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cat.CatId)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
